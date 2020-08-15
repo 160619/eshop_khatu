@@ -49,6 +49,14 @@
                   <i data-feather="chevron-down" class="svg-icon"></i>
                 </span>
               </a>
+
+              <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                <div class="dropdown-item nav-item nav-link">
+                  <%= link_to "Logout", logout_path, method: :delete,
+                                                  data: { confirm: 'Are you sure?' },
+                                                  class: 'btn btn-rounded' %>
+                </div>
+              </div>
             </li>
           <% else %>
             <li class="nav-item nav-link">
