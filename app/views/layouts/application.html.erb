@@ -32,22 +32,42 @@
         </ul>
 
         <ul class="navbar-nav float-right">
-          <li class="nav-item nav-link">
-            <%= link_to 'Sign up', users_sign_up_path, class:"btn btn-primary" %>
-          </li>
+          <% if signed_in? %>
+            <li class="nav-item d-none d-md-block">
+              <a class="nav-link" href="javascript:void(0)">
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                <span class="ml-2 d-none d-lg-inline-block">
+                  <span class="text-dark"><%= current_user.email %></span>
+                  <i data-feather="chevron-down" class="svg-icon"></i>
+                </span>
+              </a>
+            </li>
+          <% else %>
+            <li class="nav-item nav-link">
+              <%= link_to 'Sign up', users_sign_up_path, class:"btn btn-primary" %>
+            </li>
 
-          <li class="nav-item nav-link">
-            <%= link_to 'Sign in', class:"btn btn-primary" %>
-          </li>
+            <li class="nav-item nav-link">
+              <%= link_to 'Sign in', users_sign_in_path, class:"btn btn-primary" %>
+            </li>
 
-          <li class="nav-item d-none d-md-block">
-            <a class="nav-link" href="javascript:void(0)">
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </a>
-          </li>
+            <li class="nav-item d-none d-md-block">
+              <a class="nav-link" href="javascript:void(0)">
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </a>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>
