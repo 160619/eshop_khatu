@@ -1,0 +1,10 @@
+<center>
+ <div class="flash">
+   <% flash.each do |key, value| %>
+     <div class="alert alert-<%= key %> alert-dismissible fade show">
+       <button type="button" class="close" data-dismiss="alert">&times;</button>
+       <h4 class="text-left"><%= value %></h4>
+     </div>
+   <% end %>
+ </div>
+</center>
