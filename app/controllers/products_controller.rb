@@ -7,19 +7,15 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  def show
-    @product = Product.find(params[:id])
-  end
-
   def new
     @product = Product.new
   end
 
   def create
-    @product = Product.new(product_params)
+    @product = Product.new product_params
     if @product.save
       flash[:notice] = 'Product added!'
-      redirect_to root_path
+      redirect_to products_path
     else
       flash[:error] = 'Failed to create product!'
       render :new
@@ -28,6 +24,6 @@ class ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit :name, :price, :active, :desc, :category_id
+      params.require(:product).permit :product_name, :quantity, :unit_price, :discontinued, :desc, :category_id
     end
 end

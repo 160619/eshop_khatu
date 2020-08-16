@@ -8,6 +8,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.decimal :unit_price, precision: 12, scale: 3
       t.boolean :discontinued
       t.text :desc
+      t.string :image
       t.integer :category_id
 
       t.timestamps

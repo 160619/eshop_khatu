@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_08_16_072144) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.integer "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_08_16_072144) do
     t.decimal "unit_price", precision: 12, scale: 3
     t.boolean "discontinued"
     t.text "desc"
+    t.string "image"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

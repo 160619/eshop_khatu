@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
    @category = Category.new category_params
    if @category.save
      flash[:success] = 'Create category successfully'
-     redirect_to categories_url
+     redirect_to categories_path
    else
      flash.now[:alert] = 'Create category failed'
      render :new
@@ -25,6 +25,6 @@ class CategoriesController < ApplicationController
 
  private
    def category_params
-     params.require(:category).permit :name
+     params.require(:category).permit :name, :parent_id
    end
 end
