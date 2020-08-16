@@ -1,0 +1,48 @@
+<div class="w-75 p-3">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-9">
+        <h3 class="text-center">Products</h3>
+      </div>
+
+      <div class="col-lg-3">
+        <%= link_to "Add Category", new_product_path, class: 'btn btn-info pull-right' %>
+        <%= link_to "Back", root_path, class: 'btn btn-info pull-right' %>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Product name</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Unit price</th>
+        <th>Units in stock</th>
+        <th>Units on order</th>
+        <th>Discontinued</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.product_name %></td>
+          <td><%= product.category&.category_name %></td>
+          <td><%= product.quantity %></td>
+          <td><%= product.unit_price %></td>
+          <td><%= product.units_in_stock %></td>
+          <td><%= product.units_on_order %></td>
+          <td><%= product.discontinued %></td>
+          <td><%= link_to 'Edit', edit_product_path(product), class: 'btn btn-primary' %>&emsp;&emsp;&emsp;&emsp;
+              <%= link_to 'Delete', product_path(product),  method: :delete,
+                                                        data: { confirm: 'Are you sure?' },
+                                                        class: 'btn btn-primary' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
