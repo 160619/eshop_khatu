@@ -4,7 +4,6 @@ class Product < ActiveRecord::Base
   validates :product_name, presence: true, length: { minimum: 5 }
   validates :quantity, presence: true
   validates :unit_price, presence: true
-  validates :category_id, presence: true
 
   belongs_to :category
 end

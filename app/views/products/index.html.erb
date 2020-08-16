@@ -22,7 +22,6 @@
         <th>Units in stock</th>
         <th>Units on order</th>
         <th>Discontinued</th>
-        <th></th>
       </tr>
     </thead>
 
@@ -36,11 +35,6 @@
           <td><%= product.units_in_stock %></td>
           <td><%= product.units_on_order %></td>
           <td><%= product.discontinued %></td>
-          <td><%= link_to 'Edit', edit_product_path(product), class: 'btn btn-primary' %>&emsp;&emsp;&emsp;&emsp;
-              <%= link_to 'Delete', product_path(product),  method: :delete,
-                                                        data: { confirm: 'Are you sure?' },
-                                                        class: 'btn btn-primary' %>
-          </td>
         </tr>
       <% end %>
     </tbody>

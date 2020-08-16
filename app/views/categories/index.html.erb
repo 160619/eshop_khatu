@@ -18,7 +18,6 @@
         <th>Name</th>
         <th>Number of products</th>
         <th>Creation time</th>
-        <th></th>
       </tr>
     </thead>
 
@@ -28,11 +27,6 @@
           <td><%= category.name %></td>
           <td>&emsp;&emsp;&emsp;&emsp;<%= category.products.count %></td>
           <td><%= category.created_at %></td>
-          <td><%= link_to 'Edit', edit_category_path(category), class: 'btn btn-primary' %>&emsp;&emsp;&emsp;&emsp;
-              <%= link_to 'Delete', category_path(category),  method: :delete,
-                                                        data: { confirm: 'Are you sure?' },
-                                                        class: 'btn btn-primary' %>
-          </td>
         </tr>
       <% end %>
     </tbody>

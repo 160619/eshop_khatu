@@ -3,8 +3,6 @@
     <div class="col-lg-offset-3 col-lg-6">
       <h1 class="text-center">Create category</h1>
       <%= form_for Category.new ,url: categories_path do |f| %>
-        <%= render 'shared/error_messages', object: @category %>
-
         <div class="form-group row">
           <label for="staticName" class="col-sm-2 col-form-label">Name</label>
 
