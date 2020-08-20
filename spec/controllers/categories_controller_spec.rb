@@ -20,13 +20,14 @@ describe "#new" do
   it "assigns a new category to @categories" do
     get :new
     expect(response).to have_http_status(:success)
-  end
-
-   it "renders the new view" do
-    get :new
     expect(response).to render_template(:new)
   end
-end
+
+    it "befor create a presisted category" do
+     get :new
+     expect(assigns(:category)).to be_a_kind_of(Category)
+   end
+  end
 
   describe "#create" do
     context "success" do

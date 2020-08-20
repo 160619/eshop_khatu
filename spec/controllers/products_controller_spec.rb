@@ -21,11 +21,12 @@ describe "#new" do
   it "assigns a new product to @products" do
     get :new
     expect(response).to have_http_status(:success)
+    expect(response).to render_template(:new)
   end
 
-   it "renders the new view" do
+   it "befor create a presisted product" do
     get :new
-    expect(response).to render_template(:new)
+    expect(assigns(:product)).to be_a_kind_of(Product)
   end
 end
 
@@ -44,7 +45,7 @@ end
         expect(response).to redirect_to(products_path)
       end
     end
-    
+
     context "failed" do
       it "does not create a new product in database" do
         category = Category.create name: 'Laptop'
