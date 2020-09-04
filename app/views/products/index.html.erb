@@ -28,12 +28,12 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= product.product_name %></td>
+          <td><%= link_to product.product_name, product_path(product) %></td>
           <td><%= product.category.name %></td>
           <td><%= product.quantity %></td>
           <td><%= product.unit_price %></td>
-          <td><%= product.units_in_stock %></td>
-          <td><%= product.units_on_order %></td>
+          <td><%= product.unit_instock %></td>
+          <td><%= product.unit_on_order %></td>
           <td><%= product.discontinued %></td>
         </tr>
       <% end %>

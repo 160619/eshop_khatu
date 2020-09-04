@@ -6,4 +6,5 @@ class Product < ActiveRecord::Base
   validates :unit_price, presence: true
 
   belongs_to :category
+  has_many :reviews
 end

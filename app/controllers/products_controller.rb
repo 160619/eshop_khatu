@@ -4,7 +4,7 @@
 
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.all.order(:product_name)
   end
 
   def new
@@ -20,6 +20,18 @@ class ProductsController < ApplicationController
       flash[:error] = 'Failed to create product!'
       render :new
     end
+  end
+
+  def show
+    @product = Product.find(params[:id])
+    @reviews = Review.where(product_id: @product.id).order("created_at DESC")
+
+    if @reviews.blank?
+      @avg_review = 0
+    else
+      @avg_review = @reviews.average(:rating).round(2)
+    end
+    @product.aggregate_rating = @avg_review
   end
 
   private

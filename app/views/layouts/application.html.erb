@@ -30,13 +30,30 @@
         </ul>
 
         <ul class="navbar-nav float-right">
-          <li class="nav-item nav-link">
-            <%= link_to 'Create Product', new_product_path, class:"btn btn-primary" %>
-          </li>
+	        <% if user_signed_in? %>
+            <li class="nav-item nav-link">
+              <%= link_to 'List Product', products_path, class:"btn btn-primary" %>
+            </li>
 
-          <li class="nav-item nav-link">
-            <%= link_to 'Create Category', new_category_path, class:"btn btn-primary" %>
-          </li>
+            <li class="nav-item nav-link">
+              <%= link_to 'Create Product', new_product_path, class:"btn btn-primary" %>
+            </li>
+
+            <li class="nav-item nav-link">
+              <%= link_to 'Create Category', new_category_path, class:"btn btn-primary" %>
+            </li>
+
+            <li class="nav-item nav-link">
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-primary" %>
+            </li>
+          <% else %>
+            <li class="nav-item nav-link">
+              <%= link_to 'Sign in', new_user_session_path, class:"btn btn-primary" %>
+            </li>
+            <li class="nav-item nav-link">
+              <%= link_to 'Sign up', new_user_registration_path, class:"btn btn-primary" %>
+            </li>
+          <% end %>
 
           <li class="nav-item d-none d-md-block">
             <a class="nav-link" href="javascript:void(0)">
