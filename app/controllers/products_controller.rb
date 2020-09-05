@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
     else
       @avg_review = @reviews.average(:rating).round(2)
     end
-    @product.aggregate_rating = @avg_review
+    @product.update_attribute(:aggregate_rating, @avg_review)
   end
 
   private

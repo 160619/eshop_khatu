@@ -2,13 +2,25 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-4">
+        <center><h2><%= @product.product_name %></h2></center>
         <div class="table-responsive">
           <table class="table">
             <tbody>
               <tr>
-                <td><h2><%= @product.product_name %></h2></td>
+                <td rowspan="2"><strong>Aggregate Rating:</strong></td>
                 <td>
-                  <%= @avg_review %> star_
+                  <% @product.aggregate_rating.to_i.times do %>
+                    <span class="star">★</span>
+                  <% end %>
+                  <% (5 - @product.aggregate_rating.to_i).times do %>
+                    <span class="out-of">★</span>
+                  <% end %>&ensp;
+                  <strong><%= @product.aggregate_rating %> / 5</strong>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="fas fa-user"></i>&ensp;
                   <em><%= "#{@reviews.length} reviews" %></em>
                 </td>
               </tr>

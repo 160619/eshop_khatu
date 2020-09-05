@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_08_30_103345) do
   create_table "products", force: :cascade do |t|
     t.string "product_name"
     t.integer "quantity"
-    t.integer "unit_instock"
+    t.integer "unit_in_stock"
     t.integer "unit_on_order"
     t.decimal "unit_price", precision: 12, scale: 3
     t.boolean "discontinued"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_08_30_103345) do
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "aggregate_rating"
+    t.decimal "aggregate_rating", precision: 2, scale: 1
   end
 
   create_table "reviews", force: :cascade do |t|
