@@ -1,0 +1,15 @@
+<h3>Review for <%= @product.product_name %></h3>
+<div class="reviews">
+  <p>
+    <strong><%= @review.user.email %></strong>
+    <% @review.rating.times do %>
+      <span class="star">★</span>
+    <% end %>
+    <% (5 - @review.rating).times do %>
+      <span class="out-of">★</span>
+    <% end %>
+  </p>
+  <p><%= @review.content %></p>
+  <em><%= time_ago_in_words(@review.created_at) %> ago</em>
+</div>
+<%= link_to "Return to product", product_path(@product) %>

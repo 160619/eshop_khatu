@@ -7,4 +7,9 @@ class Product < ActiveRecord::Base
 
   belongs_to :category
   has_many :reviews
+
+  def calculate_rating
+    avg_review = self.reviews.average(:rating).round(2)
+    self.update(aggregate_rating: avg_review)
+  end
 end

@@ -3,6 +3,8 @@
 # Description/Explanation of ProductsController class
 
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @products = Product.all.order(:product_name)
   end
@@ -24,14 +26,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
-    @reviews = Review.where(product_id: @product.id).order("created_at DESC")
-
-    if @reviews.blank?
-      @avg_review = 0
-    else
-      @avg_review = @reviews.average(:rating).round(2)
-    end
-    @product.update_attribute(:aggregate_rating, @avg_review)
+    @reviews = @product.reviews.order("created_at DESC")
+    @review = @product.reviews.new
   end
 
   private

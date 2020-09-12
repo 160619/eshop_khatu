@@ -23,7 +23,7 @@ describe "#new" do
     expect(response).to render_template(:new)
   end
 
-    it "befor create a presisted category" do
+    it "renders the new view" do
      get :new
      expect(assigns(:category)).to be_a_kind_of(Category)
    end
