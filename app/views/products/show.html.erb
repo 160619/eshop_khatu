@@ -40,8 +40,7 @@
               </tr>
             </tbody>
           </table>
-          <%= link_to "Return to products", products_path %>
-          <%= link_to "All review", product_reviews_path(@product) %>
+          <%= link_to "Return to List products", products_path %>
         </div>
       </div>
       <div class="col-md-7 col-md-offset-1">
@@ -67,7 +66,23 @@
                   <%= truncate(review.content, :length => 30) %>
                 </a>
               </p>
-              <em><%= time_ago_in_words(review.created_at) %> ago</em>
+              <em>
+                <%= time_ago_in_words(review.created_at) %> ago &ensp;
+                <% if review.comments.count == 0 %>
+                  0 Reply
+                <% else %>
+                  <%= review.comments.length %> Reply
+                <% end %>
+              </em>
+              <% if user_signed_in? %>
+                <%= render 'comments/form', review: review %>
+              <% end %>
+              <% if review.comments.count > 0 %>
+                <% review.comments.each do |comment| %>
+                  <p><%= comment.body %></p>
+                  <em><%= time_ago_in_words(comment.created_at) %> ago</em>
+                <% end %>
+              <% end %>
             </div>
           <% end %>
         <% end %>

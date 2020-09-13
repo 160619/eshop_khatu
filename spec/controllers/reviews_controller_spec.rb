@@ -55,7 +55,7 @@ RSpec.describe ReviewsController, type: :controller do
         expect(Review.count).to eql(0)
       end
 
-      it "render sign in page" do
+      it "redirect_to sign in page" do
         post :create, params: { product_id: product.id, review: { content: 'advf', rating: 4}}
         expect(response).to redirect_to(new_user_session_path)
       end

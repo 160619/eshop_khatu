@@ -11,5 +11,12 @@
   </p>
   <p><%= @review.content %></p>
   <em><%= time_ago_in_words(@review.created_at) %> ago</em>
+  <h3>Comment</h3>
+  <% if @review.comments.count > 0 %>
+    <% @review.comments.each do |comment| %>
+      <p><%= comment.body %></p>
+      <em><%= time_ago_in_words(comment.created_at) %> ago</em>
+    <% end %>
+  <% end %>
 </div>
 <%= link_to "Return to product", product_path(@product) %>
