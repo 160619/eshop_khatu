@@ -90,5 +90,17 @@ RSpec.describe ProductsController, type: :controller do
       get :show, params: { id: product.id }
       expect(response).to have_http_status(200)
     end
+
+    it "render review form page" do
+      get 'reviews/form'
+      expect(response).to have_http_status(302)
+      expect(assigns(:review)).to be_a_kind_of(Review)
+    end
+
+    it "render comment form page" do
+      get 'comments/form'
+      expect(response).to have_http_status(302)
+      expect(assigns(:comment)).to be_a_kind_of(Comment)
+    end
   end
 end

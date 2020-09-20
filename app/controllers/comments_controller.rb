@@ -3,21 +3,22 @@
 # Description/Explanation of CommentsController class
 
 class CommentsController < ApplicationController
-  def new
-    @review = Review.find(params[:review_id])
-    @comment = @review.comments.new
-  end
+  before_action :authenticate_user!
 
   def create
     @review = Review.find(params[:review_id])
     @comment = @review.comments.new(comment_params)
     @comment.user_id = current_user.id
-    if @comment.save
-      flash[:notice] = 'Comment added!'
-      redirect_to review_path(@comment.review)
-    else
-      flash[:error] = 'Failed to create comment!'
-      render 'product/show'
+
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @review.product, notice: 'Comment added!' }
+        format.js
+        format.json { render json: @comment, status: :created, location: @user }
+      else
+        format.html { render 'products/show' }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
   end
 

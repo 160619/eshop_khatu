@@ -8,7 +8,7 @@
             <tbody>
               <tr>
                 <td rowspan="2"><strong>Aggregate Rating:</strong></td>
-                <td>
+                <td id="aggregate_rating">
                   <% @product.aggregate_rating.to_i.times do %>
                     <span class="star">★</span>
                   <% end %>
@@ -50,41 +50,44 @@
         <% if @reviews.blank? %>
           <h3>No reviews just yet, would you like to add the first!</h3>
         <% else %>
-          <% @reviews.each do |review| %>
-            <div class="reviews">
-              <p>
-                <strong><%= review.user.email %></strong>
-                <% review.rating.times do %>
-                  <span class="star">★</span>
-                <% end %>
-                <% (5 - review.rating).times do %>
-                  <span class="out-of">★</span>
-                <% end %>
-              </p>
-              <p>
-                <a href="<%= product_review_path(@product, review) %>">
-                  <%= truncate(review.content, :length => 30) %>
-                </a>
-              </p>
-              <em>
-                <%= time_ago_in_words(review.created_at) %> ago &ensp;
-                <% if review.comments.count == 0 %>
-                  0 Reply
-                <% else %>
-                  <%= review.comments.length %> Reply
-                <% end %>
-              </em>
-              <% if user_signed_in? %>
-                <%= render 'comments/form', review: review %>
-              <% end %>
-              <% if review.comments.count > 0 %>
-                <% review.comments.each do |comment| %>
-                  <p><%= comment.body %></p>
-                  <em><%= time_ago_in_words(comment.created_at) %> ago</em>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
+          <div id='reviews'>
+            <% @reviews.each do |review| %>
+              <div class="reviews">
+                <div id="review_item_<%= review.id %>">
+                  <p>
+                    <strong><%= review.user.email %></strong>
+                    <% review.rating.times do %>
+                      <span class="star">★</span>
+                    <% end %>
+                    <% (5 - review.rating).times do %>
+                      <span class="out-of">★</span>
+                    <% end %>
+                  </p>
+                  <p><%= review.content %></p>
+                  <em>
+                    <%= time_ago_in_words(review.created_at) %> ago &ensp;
+                    <% if review.comments.count == 0 %>
+                      0 Reply
+                    <% else %>
+                      <%= review.comments.length %> Reply
+                    <% end %>
+                  </em>
+                  <% if user_signed_in? %>
+                    <%= render 'comments/form', review: review %>
+                  <% end %>
+                  <ul id = "comments_of_review_<%= review.id %>" >
+                    <% review.comments.each do |comment| %>
+                      <li>
+                        <strong><%= comment.user.email %>:</strong>&ensp;
+                        <%= comment.body %>&ensp;
+                        <em><%= time_ago_in_words(comment.created_at) %> ago</em>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

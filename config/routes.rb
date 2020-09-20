@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :categories, only: %i[index new create]
   resources :products do
-    resources :reviews
+    resources :reviews, only: %i[create]
   end
 
   resources :reviews do

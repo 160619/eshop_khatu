@@ -32,6 +32,11 @@ RSpec.describe ReviewsController, type: :controller do
         expect(response).to have_http_status(302)
         expect(response).to redirect_to(product_path(product))
       end
+
+      it "responds with JSON formatted output" do
+        post :create, format: :json, params: { product_id: product.id, review: { content: 'advf', rating: 4}}
+        expect(response).to have_content_type :json
+      end
     end
 
     context 'create a review failed' do
@@ -46,30 +51,27 @@ RSpec.describe ReviewsController, type: :controller do
       end
 
       it "doesn't calculate product avg rating" do
-        post :create, params: { product_id: product.id, review: { content: 'advf', rating: 4}}
+        sign_in user
+        post :create, params: { product_id: product.id, review: { content: '', rating: ''}}
         expect(product.reload.aggregate_rating).to eql(nil)
       end
 
-      it "doesn't create a review in database" do
-        post :create, params: { product_id: product.id, review: { content: 'advf', rating: 4}}
+      it "doesn't create a comment in database" do
+        sign_in user
+        post :create, params: { product_id: product.id, review: { content: '', rating: ''}}
         expect(Review.count).to eql(0)
       end
 
-      it "redirect_to sign in page" do
+      it "render show product pages" do
+        sign_in user
+        post :create, params: { product_id: product.id, review: { content: '', rating: ''}}
+        expect(response).to render_template('products/show')
+      end
+
+      it "redirect_to sign in page without sign in user" do
         post :create, params: { product_id: product.id, review: { content: 'advf', rating: 4}}
         expect(response).to redirect_to(new_user_session_path)
       end
-    end
-  end
-
-  describe "#show" do
-    it "render show product page" do
-      category = Category.create(name: 'Laptop')
-      product = Product.create(product_name: 'Macbook 2015', quantity: 50, unit_price: 200, category_id: category.id)
-      user = User.create(email:'abc@gmail.com', password: '123456', password_confirmation: '123456')
-      review = Review.create(product_id: product.id, content: 'advf', rating: 4, user_id: user.id)
-      get :show, params: { product_id: product.id, id: review.id }
-      expect(response).to have_http_status(200)
     end
   end
 end
