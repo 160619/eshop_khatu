@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   validates :unit_price, presence: true
 
   belongs_to :category
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   def calculate_rating
     avg_review = self.reviews.average(:rating).round(2)

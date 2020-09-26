@@ -15,14 +15,14 @@
 //= require rails-ujs
 //= require_self
 
-$(document).on('ready turbolinks:load', function() {
+$(document).on("ready turbolinks:load", function() {
   $("#new_review")
     .on("ajax:success", function(event) {
       var data, status, xhr, _ref;
       (_ref = event.detail),
-          (data = _ref[0]),
-          (status = _ref[1]),
-          (xhr = _ref[2]);
+        (data = _ref[0]),
+        (status = _ref[1]),
+        (xhr = _ref[2]);
       $("#reviews").append(renderReviewItem(data));
       $("#aggregate_rating").html(data.product.aggregate_rating);
       $("#new_review")[0].reset();
@@ -42,16 +42,18 @@ $(document).on('ready turbolinks:load', function() {
         <p>${review.user.email}</p>
         <p>Content: ${review.content}</p>
         <p>Rating: ${review.rating}</p>
+        <ul id="comments_of_review_${review.id}"></ul>
+        ${review.comment_form}
       </div>
       <hr />
     `;
   }
 
   function reviewErroForm(errors) {
-    let errorList = document.createElement('ul');
+    let errorList = document.createElement("ul");
 
     errors.forEach(function(error) {
-      let errorItem = document.createElement('li');
+      let errorItem = document.createElement("li");
       errorItem.appendChild(document.createTextNode(error));
       errorList.appendChild(errorItem);
     });
