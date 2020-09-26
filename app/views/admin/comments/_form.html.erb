@@ -1,0 +1,32 @@
+<%= form_for Comment.new ,url: admin_comments_path do |form| %>
+  <% if @admin_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% @admin_comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :review_id %>
+    <%= form.number_field :review_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

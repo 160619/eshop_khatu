@@ -1,0 +1,12 @@
+<div class="container-fluid h-100 bg-light text-dark">
+  <div class="row justify-content-center align-items-center">
+    <h1>Create Product</h1>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+      <%= render 'form', product: @product %>
+      <%= link_to 'Home', admin_root_path, class: 'btn btn-primary' %>
+      <%= link_to 'Back', admin_categories_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>

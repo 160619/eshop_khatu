@@ -36,12 +36,14 @@
             </li>
 
             <li class="nav-item nav-link">
-              <%= link_to 'Create Product', new_product_path, class:"btn btn-primary" %>
+              <%= link_to 'List Category', categories_path, class:"btn btn-primary" %>
             </li>
 
-            <li class="nav-item nav-link">
-              <%= link_to 'Create Category', new_category_path, class:"btn btn-primary" %>
-            </li>
+            <% if current_user.role == "admin" %>
+              <li class="nav-item nav-link">
+                <%= link_to 'Admin Page', admin_root_path, class:"btn btn-primary" %>
+              </li>
+            <% end %>
 
             <li class="nav-item nav-link">
               <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"btn btn-primary" %>

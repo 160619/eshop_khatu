@@ -10,4 +10,13 @@ Rails.application.routes.draw do
   resources :reviews do
     resources :comments, only: %i[create]
   end
+
+  namespace :admin do
+    root 'static_pages#home'
+    resources :users
+    resources :categories
+    resources :products
+    resources :reviews
+    resources :comments
+  end
 end

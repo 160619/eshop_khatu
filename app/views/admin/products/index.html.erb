@@ -4,6 +4,11 @@
       <div class="col-lg-9">
         <h3 class="text-center">Products</h3>
       </div>
+
+      <div class="col-lg-3">
+        <%= link_to "Add Product", new_admin_product_path, class: 'btn btn-info pull-right' %>
+        <%= link_to "Back", admin_root_path, class: 'btn btn-info pull-right' %>
+      </div>
     </div>
   </div>
 
@@ -17,19 +22,29 @@
         <th>Units in stock</th>
         <th>Units on order</th>
         <th>Discontinued</th>
+        <th>Aggregate rating</th>
+        <th colspan="3"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= link_to product.product_name, product_path(product) %></td>
+          <td><%= product.product_name %></td>
           <td><%= product.category.name %></td>
           <td><%= product.quantity %></td>
           <td><%= product.unit_price %></td>
           <td><%= product.unit_in_stock %></td>
           <td><%= product.unit_on_order %></td>
           <td><%= product.discontinued %></td>
+          <td><%= product.aggregate_rating %></td>
+          <td><%= link_to 'Show', admin_product_path(product), class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Edit', edit_admin_product_path(product), class: 'btn btn-primary' %></td>
+          <td>
+            <%= link_to 'Destroy', admin_product_path(product), method: :delete,
+                                  data: { confirm: 'Are you sure?' },
+                                  class: 'btn btn-danger' %>
+          </td>
         </tr>
       <% end %>
     </tbody>

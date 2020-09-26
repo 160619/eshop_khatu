@@ -1,7 +1,12 @@
 namespace :db do
   desc "TODO"
   task fake_data: :environment do
+    puts 'Create admin user'
+    User.create(email: 'nguyenbaokhatu@gmail.com', password: '123456', password_confirmation: '123456', role: 'admin')
+
+    puts 'create category and products'
     arr_cats = %w[ Samsung Macbook Asus Acer iPhone iPad Dell LG HP Leno ]
+
     arr_cats.each do |cat|
       puts "Creating category #{cat}"
       category = Category.create(name: cat)

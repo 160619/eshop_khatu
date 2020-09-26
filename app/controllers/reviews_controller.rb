@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     @product = Product.find(params[:product_id])
     @review = @product.reviews.new(review_params)
     @review.user_id = current_user.id
-
+    
     respond_to do |format|
       if @review.save
         html_comment_form = render_to_string(

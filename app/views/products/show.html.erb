@@ -73,7 +73,7 @@
                     <% end %>
                   </em>
                   <% if user_signed_in? %>
-                    <%= render 'comments/form', review: review %>
+                    <%= render 'comments/form', review: review, comment: @comment %>
                   <% end %>
                   <ul id = "comments_of_review_<%= review.id %>" >
                     <% review.comments.each do |comment| %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @admin_comment.content %>
+</p>
+
+<p>
+  <strong>Review:</strong>
+  <%= @admin_comment.review_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @admin_comment.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_comment_path(@admin_comment), class: 'btn btn-primary' %> |
+<%= link_to 'Back', admin_comments_path, class: 'btn btn-primary' %>

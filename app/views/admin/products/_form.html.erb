@@ -1,0 +1,47 @@
+<%= form_for Product.new ,url: admin_products_path do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this admin_product from being saved:</h2>
+
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :product_name %>
+    <%= f.text_field :product_name, placeholder: "Enter product name", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity, placeholder: "Enter the number of products", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :unit_price %>
+    <%= f.text_field :unit_price, placeholder: "Enter unit price", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :discountinued %>
+    <%= f.text_field :discontinued, placeholder: "Enter discountinued", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :desc %>
+    <%= f.text_field :desc, placeholder: "Enter description", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, :prompt => 'Select one!' %>
+  </div>
+
+  <div class="text-center">
+    <%= f.submit "Create Product", class: "btn btn-info col-lg-12" %>
+  </div>
+<% end %>
